@@ -25,6 +25,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
 <script src="js/jquery2.0.3.min.js"></script>
+
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
+<!-- DataTables CSS -->
+{{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"> --}}
+
+<!-- DataTables JS -->
+{{-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> --}}
 </head>
 <body>
 <section id="container">
@@ -511,3 +519,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/jquery.scrollTo.js"></script>
 </body>
 </html>
+
+<script>
+     function all_admin_donation()
+         {
+            if ($.fn.DataTable.isDataTable('#all_admin_donation')) 
+            { $('#all_admin_donation').DataTable().destroy(); }
+
+            $('#all_admin_donation').DataTable({
+                "processing" : true,
+                "serverSide" : true,
+                "ajax" : {
+                        "url" : "{{route('all_admin_donation_data')}}",
+                        "type" : "POST",
+                        "dataType" : "JSON",
+                        "headers": {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                },
+                "columns" : [
+                    {"data" : "id"},
+                    {"data" : "category_id"},
+                    {"data" : "account_type"},
+                    {"data" : "amount"},
+                    {"data" : "phone"},
+                    {"data" : "email"},
+                    {"data" : "name"},
+                    {"data" : "pan"},
+                    {"data" : "status"},
+                    {"data" : "created_at"},
+                    {"data" : "action"},
+                ]
+            });
+         }
+</script>
